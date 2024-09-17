@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="sweetalret.js"></script>
+	<title>Sign Up</title>
+</head>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	body {
+		font-family: 'Poppins', sans-serif;
+		background-image: url('Foto.jpg');
+		background-size: cover;
+		background-position: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+		margin: 0;	
+	}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+.pogo {
+    font-size: 2em;
+    color: #fff;
+    margin-top: -10px;
+    margin-left: -10px ;
+    user-select: none;
+}
+
+.nav_go a {
+    position: relative;
+    font-size: 1.1em;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 25px;
+}
+
+.nav_go a::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -5px;
+    height: 3px;
+    background: #fff;
+    border-radius: 5px;
+    transform: scale(0);
+    transform-origin:left ;
+    transition: transform .5s;
+}
+
+.nav_go a:hover::after {
+    transform-origin: left;
+    transform: scale(1);
+}
+
+.signUp-container {
+		background-color: #fff;
+		border-radius: 10px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+		padding: 20px;
+		margin: 0 auto;
+		margin-top: 50px;
+		height: 65%;
+		width: 50%;
+		max-width: 300px;
+		min-width: 300px;
+		text-align: center;
+		opacity: 0.9;
+	}
+
+.signUp-container h2 {
+		font-size: 30px;
+		margin-bottom: 40px;
+		text-align: center;
+		margin-top: 20px;
+	}
+
+.signUp-container h6 {
+		font-size: 10px;
+		font-family: Arial, sans-serif;
+		font-weight: bold;
+		text-align: center;
+		margin-top: 50px;
+		margin-bottom: 5px;
+		text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+
+.signUp-container a {
+		text-decoration: none;
+		text-align: center;
+		color: #696969;
+		outline: none;
+		border: none;
+		font-size: 12px;
+		font-weight: bold;
+		font-family: 'Poppins', sans-serif;
+		text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+		transition: 0.5s;
+		display: inline-block;
+	}
+
+.signUp-container a:hover {
+		color: #6f00ff;
+		text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		transition: 0.5s;
+	}
+
+.signUp-container a:active {
+		color: darkred;
+		text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		transition: 0.5s;
+	}
+
+.signUp-container input {
+		width: 100%;
+		padding: 10px;
+		margin-bottom: 10px;
+		border: 1px solid #ccc;
+		border-radius: 9px;
+		font-size: 1em;
+		outline-color: blueviolet;
+		transition: 0.5s;
+		color: blueviolet;
+	}
+
+.signUp-container button {
+		background-color: #007bff;
+		color: #fff;
+		margin-top: 25px;
+		border: none;
+		border-radius: 25px;
+		padding: 10px 20px;
+		width: 100%;
+		cursor: pointer;
+		transition: 0,5s;
+	}
+
+.signUp-container button:hover {
+		background-image: linear-gradient(45deg, #00CED1, #9932CC); /* Gradasi dari biru ke ungu */
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+		transition: 0.5s;
+		animation: gradientMove 2s linear infinite;
+	}
+
+.signUp-container button:active {
+		background-image: blueviolet;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+		transition: 0.5s;
+	}
+
+@keyframes gradientMove {
+		0% {
+			background-position: 100% 0;
+		}
+
+		100% {
+			background-position: -100% 0;
+		}
+	}
+
+</style>
+<body>
+    <header>
+        <h2 class="pogo">Pogo</h2>
+        <nav class="nav_go">
+            <a href="index.html">Home</a>
+            <a href="tabel.php">Navigation</a>
+            <a href="inputReport0.html">Report</a>
+            <a href="#">About</a>            
+        </nav>
+    </header>
+
+
+
+	<div class="signUp-container">
+        <h2>SIGN UP</h2>
+        <form action="" method="post">
+        	<input type="text" placeholder="Username" name="nama" required>
+            <input type="text" placeholder="E-mail" name="email" required>
+            <!-- <span>Username</span> -->
+            <input type="password" placeholder="Password" name="password" required>
+            <!-- <span>Password</span> -->
+            <button name="sign" type="submit">SIGN UP</button>
+        </form>
+
+        <h6>Or Login Using</h6>
+        <a href="login.php">LOGIN</a>
+    </div>
+
+    <?php 
+    	include "inputMySql.php";
+
+    	if(isset($_POST['sign'])) {
+    		mysqli_query($koneksi, "insert into akun set 
+    			first_nama = '$_POST[email]',
+    			username = '$_POST[nama]',
+    			password_akun = '$_POST[password]'");
+
+    		echo "
+    		<script>
+                        swal({
+                              title: 'Akun berhasil terdaftar.',
+                              icon: 'success',
+                              showConfirmButton: false,
+                 		 }); 
+            </script>";
+
+    		echo "<meta http-equiv=refresh content=4;URL='login.php'>";
+    	}
+     ?>
+</body>
+</html>
